@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="script.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+    <div>
+        <header>
+            <nav style="text-align: right; background-color: rgb(235, 222, 247);">
+            <span onclick="openThemeModal()" style="cursor: pointer;">Change Theme</span>
+            </nav>
+        </header>
+    </div>
+    <!-- Basic structure for task viewing -->
+    <div class="container">
+        <div class="content">
+            <div class="tasks">
+                <h1 class="h1style">To-Do List Application</h1>
+                <div class="table-container">
+                    <div class="hover-message">Double click on tasks to mark as in progress or mark as completed</div>
+                    <h3 class="divheader">Tasks        
+                        <button id="addtask" onclick="openmodal()"><b>+</b></button>
+                    </h3>
+                </div>               
+                <table id="todo">
+                    <thead>
+                        <tr>
+                            <th>Task</th>
+                            <th>Deadline</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+                <div class="table-container">
+                    <div class="hover-message">Double click on tasks to mark as completed</div>
+                    <h3 class="divheader">In Progress</h3>
+                </div>  
+                <table id="progress">
+                    <thead>
+                        <tr>
+                            <th>Task</th>
+                            <th>Started on</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+                <h3 class="divheader">Completed</h3>
+                <table id="completed">
+                    <thead>
+                        <tr>
+                            <th>Task</th>
+                            <th>Completed on</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+        <div class="sidebar">
+            <div id="datetime"></div><hr>
+            <h2>Incomplete tasks</h2>
+            <div id="previousTasks"></div><hr>
+            <h2>Tasks due today</h2>
+            <div id="tasksDueToday"></div><hr>
+            <h2>Tasks due this week</h2>
+            <div id="upcomingTasks"></div><hr><br>
+            <div id="pomodoro" onclick="openModal()"><button id="pombtn"><h3>Set pomodoro timer</h3></button></div>
+            <br>
+        </div>
+    </div>
+
+    <!-- Modal for adding task -->
+    <div id="taskmodal" class="modal">
+        <div class="contentmodal">
+            <span onclick="closemodal()" class="close">&times;</span>
+            <h3 style="text-align: center";>New Task</h3>
+            <input type="text" id="taskinput" placeholder="Enter task here...">
+            <br><br>
+            <input type="date" id="due">
+            <br><br>
+            <button onclick="addtask()">Add</button>
+        </div>
+    </div>
+
+    <!-- Modal for editing tasks -->
+    <div id="edittaskmodal" class="modal">
+        <div class="contentmodal">
+            <span class="close" onclick="closeeditmodal()">&times;</span>
+            <h3>Edit Task</h3>
+            <input type="text" id="editinput" placeholder="Enter your new task here...">
+            <br><br>
+            <input type="date" id="editdue">
+            <br><br>
+            <button onclick="edit()">Update Task</button>
+        </div>
+    </div>
+
+    <!-- Modal for marking tasks as In Progress or Completed -->
+    <div id="markmodal" class="modal">
+        <div class="contentmodal">
+            <span class="close" onclick="closemarkmodal()">&times;</span>
+            <h3>Update Task Status</h3>
+            <label for="yes">
+                <input type="radio" id="yes" name="markoption" value="progress"> Mark as In Progress
+            </label>
+            <br>
+            <label for="markcompleted">
+                <input type="radio" id="markcompleted" name="markoption" value="completed"> Mark as Completed
+            </label>
+            <br><br>
+            <button onclick="marktask()">Confirm</button>
+        </div>
+    </div>
+
+    <!-- Theme Modal -->
+    <div id="themeModal" class="modal">
+        <div class="contentmodal">
+            <span class="close" onclick="closeThemeModal()">&times;</span>
+            <h2>Select Theme</h2>
+            <button onclick="applyTheme('red')" style="background-color: rgb(255, 228, 230);">Red</button>
+            <button onclick="applyTheme('green')" style="background-color: rgb(228, 255, 230);">Green</button>
+            <button onclick="applyTheme('blue')" style="background-color: rgb(230, 240, 255);">Blue</button>
+            <button onclick="applyTheme('orange')" style="background-color: rgb(255, 238, 230);">Orange</button>
+            <button onclick="applyTheme('purple')" style="background-color: rgb(235, 222, 247);">Purple</button>
+        </div>
+    </div>  
+    
+    <!-- Modal for setting work and break minutes -->
+    <div id="modal" class="modal">
+        <div class="contentmodal">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <label for="work-minutes">Work Minutes:</label>
+            <input type="number" id="work-minutes" name="work-minutes"><br><br>
+            <label for="break-minutes">Break Minutes:</label>
+            <input type="number" id="break-minutes" name="break-minutes">
+            <button id="set-button" onclick="setPomodoro()">Set</button>
+        </div>
+    </div>
+    
+    <!-- Modal for countdown timers -->
+    <div id="countdown-modal" class="modal">
+        <div class="contentmodal">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <div id="work-timer"><b>Work Timer</b>: 0</div>
+            <button onclick="startWorkTimer()"><i class="fas fa-play"></i></button>
+            <button id="pause-work-button" onclick="pauseTimer()"><i class="fas fa-pause"></i></button>
+            <button id="reset-work-button" onclick="resetTimer()"><i class="fas fa-redo-alt"></i></button>
+            <div id="break-timer"><b>Break Timer</b>: 0</div>
+            <button onclick="startBreakTimer()"><i class="fas fa-play"></i></button>
+            <button id="pause-break-button" onclick="pauseBreakTimer()"><i class="fas fa-pause"></i></button>
+            <button id="reset-break-button" onclick="resetBreakTimer()"><i class="fas fa-redo-alt"></i></button>
+        </div>
+    </div>    
+
+    </body>
+</html>
