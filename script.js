@@ -1,5 +1,5 @@
 var selectedRow = null;
-var theme = 'blue';
+var theme = 'purple';
 
 document.addEventListener('DOMContentLoaded', () => {
     const storedTheme = getStoredTheme();
