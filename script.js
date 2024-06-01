@@ -1,5 +1,5 @@
 var selectedRow = null;
-var theme = 'purple';
+var theme = 'blue';
 
 document.addEventListener('DOMContentLoaded', () => {
     const storedTheme = getStoredTheme();
@@ -377,7 +377,7 @@ function closeThemeModal() {
 //Themes
 var themes = {
     'red': {
-        'background-image': 'url(images/red.jpg)',
+        'background-image': 'url(Images/red.jpg)',
         'background-color': 'rgb(255, 228, 230)',
         'header-background-color': 'rgb(255, 200, 200)',
         'button-color': 'rgb(255, 150, 150)',
@@ -385,7 +385,7 @@ var themes = {
         'border-color': 'rgb(200, 0, 0)'
     },
     'green': {
-        'background-image': 'url(images/green.jpg)',
+        'background-image': 'url(Images/green.jpg)',
         'background-color': 'rgb(228, 255, 230)',
         'header-background-color': 'rgb(200, 255, 200)',
         'button-color': 'rgb(150, 255, 150)',
@@ -393,7 +393,7 @@ var themes = {
         'border-color': 'rgb(0, 200, 0)'
     },
     'blue': {
-        'background-image': 'url(images/blue.jpg)',
+        'background-image': 'url(Images/blue.jpg)',
         'background-color': 'rgb(230, 240, 255)',
         'header-background-color': 'rgb(200, 220, 255)',
         'button-color': 'rgb(150, 200, 255)',
@@ -401,7 +401,7 @@ var themes = {
         'border-color': 'rgb(0, 0, 200)'
     },
     'orange': {
-        'background-image': 'url(images/orange.jpg)',
+        'background-image': 'url(Images/orange.jpg)',
         'background-color': 'rgb(255, 238, 230)',
         'header-background-color': 'rgb(255, 220, 200)',
         'button-color': 'rgb(255, 200, 150)',
@@ -409,7 +409,7 @@ var themes = {
         'border-color': 'rgb(200, 100, 0)'
     },
     'purple': {
-        'background-image': 'url(images/purple.jpg)',
+        'background-image': 'url(Images/purple.jpg)',
         'background-color': 'rgb(235, 222, 247)',
         'header-background-color': 'rgb(226, 201, 249)',
         'button-color': 'rgb(228, 137, 242)',
